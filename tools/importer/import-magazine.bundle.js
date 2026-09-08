@@ -106,6 +106,7 @@ var CustomImportScript = (() => {
   // tools/importer/transformers/wknd-cleanup.js
   var TransformHook = { beforeTransform: "beforeTransform", afterTransform: "afterTransform" };
   function transform(hookName, element, payload) {
+    var _a;
     if (hookName === TransformHook.beforeTransform) {
       WebImporter.DOMUtils.remove(element, [
         "#toggleNav",
@@ -128,6 +129,24 @@ var CustomImportScript = (() => {
         // stray empty <meta> tags left inside image components
         "noscript"
       ]);
+      const { document } = payload;
+      const headings = [...element.querySelectorAll("h1, h2, h3, h4, h5, h6")];
+      const h1Text = (((_a = element.querySelector("h1")) == null ? void 0 : _a.textContent) || "").trim().toLowerCase();
+      headings.forEach((h) => {
+        const text = (h.textContent || "").trim();
+        const isByline = /^by\s+\S/i.test(text);
+        const isShareLabel = /^share this story$/i.test(text);
+        const isDuplicateTitle = h.tagName !== "H1" && h1Text && text.toLowerCase() === h1Text;
+        if (isByline || isShareLabel) {
+          const p = document.createElement("p");
+          const em = document.createElement("em");
+          em.textContent = text;
+          p.append(em);
+          h.replaceWith(p);
+        } else if (isDuplicateTitle) {
+          h.remove();
+        }
+      });
     }
   }
 

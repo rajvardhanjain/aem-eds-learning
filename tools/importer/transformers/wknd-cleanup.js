@@ -39,5 +39,35 @@ export default function transform(hookName, element, payload) {
       'meta', // stray empty <meta> tags left inside image components
       'noscript',
     ]);
+
+    // Heading hierarchy normalization (accessibility: no skipped heading levels).
+    // WKND's source markup uses headings for non-structural labels, which breaks
+    // the sequential heading order (h1 -> h4 byline, h5 "SHARE THIS STORY", and a
+    // duplicate-of-title h3). Convert label headings to paragraphs and promote a
+    // duplicate title so the document outline is monotonic. Rules are text-based
+    // and safe across templates (only match these specific WKND patterns).
+    const { document } = payload;
+    const headings = [...element.querySelectorAll('h1, h2, h3, h4, h5, h6')];
+    const h1Text = (element.querySelector('h1')?.textContent || '').trim().toLowerCase();
+
+    headings.forEach((h) => {
+      const text = (h.textContent || '').trim();
+      const isByline = /^by\s+\S/i.test(text); // e.g. "By Jacob Wester"
+      const isShareLabel = /^share this story$/i.test(text);
+      const isDuplicateTitle = h.tagName !== 'H1'
+        && h1Text && text.toLowerCase() === h1Text;
+
+      if (isByline || isShareLabel) {
+        // Non-structural label: render as an emphasized paragraph, preserving text.
+        const p = document.createElement('p');
+        const em = document.createElement('em');
+        em.textContent = text;
+        p.append(em);
+        h.replaceWith(p);
+      } else if (isDuplicateTitle) {
+        // Redundant repeat of the page title: drop it (the h1 already conveys it).
+        h.remove();
+      }
+    });
   }
 }

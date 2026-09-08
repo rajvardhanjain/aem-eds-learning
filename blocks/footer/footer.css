@@ -28,15 +28,17 @@ footer .footer img {
   height: 44px;
 }
 
-/* headings (Follow Us) */
-footer .footer h5 {
+/* section label (Follow Us) */
+footer .footer > div:nth-child(3) p:first-child {
   margin: 0 0 12px;
   color: #fff;
-  font-family: var(--body-font-family);
   font-size: 14px;
-  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+footer .footer > div:nth-child(3) p:first-child strong {
+  font-weight: 600;
 }
 
 /* link lists */
@@ -61,6 +63,7 @@ footer .footer a:hover {
 }
 
 /* description / copyright */
+/* stylelint-disable-next-line no-descending-specificity */
 footer .footer > div:last-child p {
   color: #b0b0b0;
   font-size: 14px;
