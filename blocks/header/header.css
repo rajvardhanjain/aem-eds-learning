@@ -31,39 +31,25 @@ header nav[aria-expanded='true'] {
 }
 
 @media (width >= 900px) {
+  /* desktop header sits in normal flow (like the WKND reference build) — no
+     fixed positioning and no main padding hack, so page top spacing is clean */
   header .nav-wrapper {
-    position: fixed;
-    top: 0;
+    position: relative;
   }
 
   header nav {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     gap: 0 32px;
     max-width: 1264px;
     height: 130px;
     padding: 0 32px;
-    transition: height 0.2s ease;
   }
 
   header nav[aria-expanded='true'] {
     min-height: 0;
     overflow: visible;
-  }
-
-  /* shrink on scroll (WKND: ~130px nav row -> ~74px) */
-  header .nav-wrapper.nav-scrolled nav {
-    height: 74px;
-  }
-
-  header .nav-wrapper.nav-scrolled {
-    box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
-  }
-
-  /* reserve space so the fixed header does not cover page content
-     (utility bar ~32px + nav row 130px) */
-  main {
-    padding-top: 162px;
   }
 }
 
