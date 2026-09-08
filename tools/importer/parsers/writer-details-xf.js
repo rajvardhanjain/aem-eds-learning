@@ -40,6 +40,6 @@ export default function parse(element, { document }) {
   const cells = [];
   cells.push([avatar || '', infoCell]);
 
-  const block = WebImporter.Blocks.createBlock(document, { name: 'writer-details', cells });
+  const block = WebImporter.Blocks.createBlock(document, { name: 'writer-details-xf', cells });
   element.replaceWith(block);
 }

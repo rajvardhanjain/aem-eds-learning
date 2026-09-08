@@ -78,7 +78,17 @@ function createSlide(row, slideIndex, carouselId) {
   slide.classList.add('carousel-hero-slide');
 
   row.querySelectorAll(':scope > div').forEach((column, colIdx) => {
-    column.classList.add(`carousel-hero-slide-${colIdx === 0 ? 'image' : 'content'}`);
+    const isImage = colIdx === 0;
+    column.classList.add(`carousel-hero-slide-${isImage ? 'image' : 'content'}`);
+    if (!isImage) {
+      // WKND CTA renders as a yellow button; buttonize the standalone link
+      // (the project's global decorateButtons only styles bold/italic links).
+      const cta = column.querySelector('p:last-of-type > a[href]:only-child');
+      if (cta && cta.closest('p').textContent.trim() === cta.textContent.trim()) {
+        cta.classList.add('button', 'primary');
+        cta.closest('p').classList.add('button-container');
+      }
+    }
     slide.append(column);
   });
 

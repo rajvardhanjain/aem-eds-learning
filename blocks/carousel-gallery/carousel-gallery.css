@@ -1,3 +1,12 @@
+/* WKND lead gallery is full-bleed edge-to-edge; break out of the 1200px content column */
+main .section > .carousel-gallery-wrapper {
+  max-width: 100vw;
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding: 0;
+}
+
 .carousel-gallery .carousel-gallery-slides-container {
   position: relative;
 }
@@ -29,7 +38,14 @@
   justify-content: center;
   position: relative;
   width: 100%;
-  min-height: min(50vw, calc(100dvh - var(--header-height)));
+
+  /* WKND mini gallery: lead image displays at ~3.2:1 (source 1280x400) */
+  aspect-ratio: 16 / 5;
+}
+
+/* image-only slides (no authored overlay) must not render an empty dark box */
+.carousel-gallery .carousel-gallery-slide-content:empty {
+  display: none;
 }
 
 .carousel-gallery .carousel-gallery-slide:has(.carousel-gallery-slide-content[data-align='center']) {
