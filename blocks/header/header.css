@@ -33,7 +33,8 @@ header nav[aria-expanded='true'] {
 
 @media (width >= 900px) {
   header .nav-wrapper {
-    position: relative;
+    position: fixed;
+    top: 0;
   }
 
   header nav {
@@ -41,12 +42,29 @@ header nav[aria-expanded='true'] {
     justify-content: space-between;
     gap: 0 32px;
     max-width: 1264px;
+    height: 130px;
     padding: 0 32px;
+    transition: height 0.2s ease;
   }
 
   header nav[aria-expanded='true'] {
     min-height: 0;
     overflow: visible;
+  }
+
+  /* shrink on scroll (WKND: ~130px nav row -> ~74px) */
+  header .nav-wrapper.nav-scrolled nav {
+    height: 74px;
+  }
+
+  header .nav-wrapper.nav-scrolled {
+    box-shadow: 0 2px 8px rgb(0 0 0 / 8%);
+  }
+
+  /* reserve space so the fixed header does not cover page content
+     (utility bar ~32px + nav row 130px) */
+  main {
+    padding-top: 162px;
   }
 }
 
@@ -151,7 +169,7 @@ header .nav-brand {
 
 header nav .nav-brand img {
   width: auto;
-  height: 40px;
+  height: 48px;
 }
 
 /* sections */
@@ -186,8 +204,8 @@ header nav .nav-sections a:any-link {
 }
 
 header nav .nav-sections a:hover {
-  color: var(--link-color);
-  text-decoration: none;
+  color: var(--brand-yellow);
+  text-decoration: underline;
 }
 
 header nav .nav-sections ul > li > ul {
