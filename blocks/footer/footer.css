@@ -5,7 +5,8 @@ footer {
   font-size: var(--body-font-size-s);
 }
 
-footer .footer {
+/* footer.js wraps the fragment sections in one div; that div is the grid */
+footer .footer > div {
   max-width: 1200px;
   margin: auto;
   padding: 48px 24px 32px;
@@ -14,7 +15,13 @@ footer .footer {
   gap: 24px 48px;
 }
 
-footer .footer > div {
+/* each footer content group is a section — these are the columns */
+footer .footer .section {
+  margin: 0;
+  padding: 0;
+}
+
+footer .footer .default-content-wrapper {
   margin: 0;
 }
 
@@ -29,7 +36,7 @@ footer .footer img {
 }
 
 /* section label (Follow Us) */
-footer .footer > div:nth-child(3) p:first-child {
+footer .footer .section:nth-child(3) p:first-child {
   margin: 0 0 12px;
   color: #fff;
   font-size: 14px;
@@ -37,7 +44,7 @@ footer .footer > div:nth-child(3) p:first-child {
   letter-spacing: 0.5px;
 }
 
-footer .footer > div:nth-child(3) p:first-child strong {
+footer .footer .section:nth-child(3) p:first-child strong {
   font-weight: 600;
 }
 
@@ -64,21 +71,21 @@ footer .footer a:hover {
 
 /* description / copyright */
 /* stylelint-disable-next-line no-descending-specificity */
-footer .footer > div:last-child p {
+footer .footer .section:last-child p {
   color: #b0b0b0;
   font-size: 14px;
   line-height: 1.5;
 }
 
 @media (width >= 900px) {
-  footer .footer {
+  footer .footer > div {
     grid-template-columns: auto 1fr 1fr;
     align-items: start;
     padding: 48px 32px 32px;
   }
 
   /* description spans full width below the columns */
-  footer .footer > div:last-child {
+  footer .footer .section:last-child {
     grid-column: 1 / -1;
     margin-top: 16px;
     border-top: 1px solid rgb(255 255 255 / 15%);

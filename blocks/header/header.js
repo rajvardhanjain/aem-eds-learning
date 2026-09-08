@@ -165,15 +165,50 @@ export default async function decorate(block) {
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
-  // convert a ":search:" text token in the tools section into a search icon
+  // convert a ":search:" text token in the tools section into a search box
+  // (icon + expandable input), matching WKND's header search.
   const navTools = nav.querySelector('.nav-tools');
   if (navTools) {
-    navTools.innerHTML = navTools.innerHTML.replace(/:search:/g, '<span class="icon icon-search"></span>');
+    navTools.innerHTML = '';
+    const search = document.createElement('div');
+    search.className = 'nav-search';
+    search.innerHTML = `
+      <button type="button" class="nav-search-toggle" aria-label="Search">
+        <span class="icon icon-search"></span>
+      </button>
+      <input type="search" class="nav-search-input" placeholder="SEARCH" aria-label="Search" />`;
+    const toggle = search.querySelector('.nav-search-toggle');
+    const input = search.querySelector('.nav-search-input');
+    toggle.addEventListener('click', () => {
+      search.classList.toggle('nav-search-open');
+      if (search.classList.contains('nav-search-open')) input.focus();
+    });
+    navTools.append(search);
   }
 
   decorateIcons(nav);
+
+  // utility bar (site chrome): Sign In + locale selector, above the main nav.
+  const utility = document.createElement('div');
+  utility.className = 'nav-utility';
+  utility.innerHTML = `
+    <div class="nav-utility-inner">
+      <a class="nav-signin" href="#signin">Sign In</a>
+      <div class="nav-locale">
+        <button type="button" class="nav-locale-toggle" aria-haspopup="true" aria-expanded="false">
+          <span class="nav-locale-flag" aria-hidden="true">🇺🇸</span> EN-US
+        </button>
+      </div>
+    </div>`;
+  const localeToggle = utility.querySelector('.nav-locale-toggle');
+  localeToggle.addEventListener('click', () => {
+    const open = localeToggle.getAttribute('aria-expanded') === 'true';
+    localeToggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+  });
+
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
+  navWrapper.append(utility);
   navWrapper.append(nav);
   block.append(navWrapper);
 }
