@@ -1,0 +1,57 @@
+.blockparty > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.blockparty > ul > li {
+  border: 1px solid #dadada;
+  background-color: var(--background-color);
+  border-radius: 4px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.blockparty > ul > li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 12%);
+}
+
+.blockparty .blockparty-item-image {
+  line-height: 0;
+}
+
+.blockparty > ul > li img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
+.blockparty .blockparty-item-body {
+  margin: 16px;
+  color: var(--text-color);
+}
+
+.blockparty .blockparty-item-body h2,
+.blockparty .blockparty-item-body h3 {
+  margin-top: 0;
+  font-size: var(--heading-font-size-s);
+}
+
+.blockparty .blockparty-item-body p {
+  margin: 8px 0 0;
+  font-size: var(--body-font-size-s);
+}
+
+.blockparty .blockparty-item-body a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.blockparty .blockparty-item-body a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}

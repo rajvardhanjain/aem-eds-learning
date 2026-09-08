@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Day 2 Demo</title>
+  <link rel="stylesheet" href="/styles/styles.css">
+</head>
+<body>
+  <header></header>
+  <main>
+
+    <!-- Section 1: Page heading -->
+    <div>
+      <h1>AEM EDS Training — Day 2 Demo</h1>
+      <p>All Day 2 assignments: Banner, Breadcrumb, Block Party, Embed, Teaser.</p>
+    </div>
+
+    <!-- ===== ASSIGNMENT 5: Banner ===== -->
+
+    <!-- Section 2: Default banner — blue -->
+    <div>
+      <div class="banner">
+        <div><div>blue</div></div>
+        <div><div><h2>Welcome to AEM EDS Training</h2><p>This is a default banner. The background colour (<strong>blue</strong>) is read from the third row by <code>banner.js</code> and applied as an inline style.</p></div></div>
+        <div><div>blue</div></div>
+      </div>
+    </div>
+
+    <!-- Section 3: Coral banner -->
+    <div>
+      <div class="banner">
+        <div><div>coral</div></div>
+        <div><div><h2>Coral Background Banner</h2><p>The colour value <strong>coral</strong> is in the third row. JS reads it and sets <code>block.style.backgroundColor = 'coral'</code>.</p></div></div>
+        <div><div>coral</div></div>
+      </div>
+    </div>
+
+    <!-- Section 4: Dark variant -->
+    <div>
+      <div class="banner dark">
+        <div><div><h2>Dark Variant Banner</h2><p>The <code>dark</code> class triggers CSS-only styling. JS detects the variant and skips the background-colour logic entirely.</p></div></div>
+      </div>
+    </div>
+
+    <!-- ===== ASSIGNMENT 6: Breadcrumb ===== -->
+
+    <div>
+      <h2>Assignment 6 — Breadcrumb</h2>
+      <p>Reads <code>window.location.pathname</code> and builds a semantic nav from URL segments.</p>
+      <div class="breadcrumb">
+        <div><div>placeholder</div></div>
+      </div>
+    </div>
+
+    <!-- ===== ASSIGNMENT 7: Block Party ===== -->
+
+    <div>
+      <h2>Assignment 7 — Block Party</h2>
+      <p>A mosaic grid of content cards. Each table row becomes a card with image + body.</p>
+      <div class="blockparty">
+        <div>
+          <div><p>Card 1 Title</p><p>Block Party showcases a grid of items. Hover over a card to see the lift effect.</p></div>
+        </div>
+        <div>
+          <div><p>Card 2 Title</p><p>Each row in the author table becomes one card in the responsive CSS grid.</p></div>
+        </div>
+        <div>
+          <div><p>Card 3 Title</p><p>Images are auto-optimised via <code>createOptimizedPicture()</code> from aem.js.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== ASSIGNMENT 8: Embed ===== -->
+
+    <div>
+      <h2>Assignment 8 — Embed</h2>
+      <p>Lazy-loads YouTube or Twitter embeds via <code>IntersectionObserver</code>. Scroll down to trigger.</p>
+      <div class="embed">
+        <div><div><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">https://www.youtube.com/watch?v=dQw4w9WgXcQ</a></div></div>
+      </div>
+    </div>
+
+    <!-- ===== ASSIGNMENT 9: Teaser ===== -->
+
+    <div>
+      <h2>Assignment 9 — Teaser</h2>
+      <p>A promo card with headline, description, and CTA button. Side-by-side layout on desktop.</p>
+      <div class="teaser">
+        <div><div><p>Teaser image placeholder (no image in local demo)</p></div></div>
+        <div><div><h3>Explore AEM EDS Blocks</h3></div></div>
+        <div><div><p>The Teaser block renders a promotional card with an image on the left and content on the right (desktop). The image is optimised automatically.</p></div></div>
+        <div><div><a href="/demo">Learn More →</a></div></div>
+      </div>
+    </div>
+
+    <!-- ===== ASSIGNMENT 10: Terms & Conditions Footer Link ===== -->
+
+    <div>
+      <h2>Assignment 10 — Terms &amp; Conditions Footer Link</h2>
+      <p>A T&amp;C page was created at <code>/terms-and-conditions</code> and its link is added to the footer navigation so it appears on every page.</p>
+      <p>In EDS, the footer content is authored in DA (Document Authoring) at the <code>/footer</code> document path. Adding a link row there makes it appear globally.</p>
+      <p>👉 <a href="/terms-and-conditions.html">View Terms &amp; Conditions page →</a></p>
+    </div>
+
+  </main>
+  <footer>
+    <div class="footer-nav" style="text-align:center;padding:1rem;border-top:1px solid var(--light-color);">
+      <nav aria-label="Footer navigation">
+        <a href="/terms-and-conditions.html" style="color:var(--link-color);">Terms &amp; Conditions</a>
+      </nav>
+    </div>
+  </footer>
+  <script type="module" src="/scripts/scripts.js"></script>
+</body>
+</html>
