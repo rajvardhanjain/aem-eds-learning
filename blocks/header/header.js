@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { decorateIcons } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
@@ -113,10 +113,11 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // load nav as fragment
-  const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
-  const fragment = await loadFragment(navPath);
+  // load nav as fragment — /content first (localhost + aem up), then root (DA/EDS prod)
+  let fragment = await loadFragment('/content/nav');
+  if (!fragment || !fragment.firstElementChild) {
+    fragment = await loadFragment('/nav');
+  }
 
   // decorate nav DOM
   block.textContent = '';
@@ -164,6 +165,13 @@ export default async function decorate(block) {
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
+  // convert a ":search:" text token in the tools section into a search icon
+  const navTools = nav.querySelector('.nav-tools');
+  if (navTools) {
+    navTools.innerHTML = navTools.innerHTML.replace(/:search:/g, '<span class="icon icon-search"></span>');
+  }
+
+  decorateIcons(nav);
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
