@@ -211,16 +211,4 @@ export default async function decorate(block) {
   navWrapper.append(utility);
   navWrapper.append(nav);
   block.append(navWrapper);
-
-  // Sticky shrink: header is tall at the top of the page and shrinks once the
-  // user scrolls (WKND behaviour: ~194px -> ~114px). Only on desktop.
-  const onScroll = () => {
-    if (isDesktop.matches && window.scrollY > 40) {
-      navWrapper.classList.add('nav-scrolled');
-    } else {
-      navWrapper.classList.remove('nav-scrolled');
-    }
-  };
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
 }
