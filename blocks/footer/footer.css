@@ -1,21 +1,16 @@
-/* WKND footer — dark bar, light logo, link columns */
+/* WKND footer — dark bar; top band (logo | nav | Follow Us + boxed social icons),
+   copyright + description below. Values measured from wknd.site/us/en. */
 footer {
   background-color: var(--brand-dark);
-  color: #ebebeb;
-  font-size: var(--body-font-size-s);
+  color: #f7f7f7;
 }
 
-/* footer.js wraps the fragment sections in one div; that div is the grid */
 footer .footer > div {
   max-width: 1200px;
   margin: auto;
-  padding: 48px 24px 32px;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 24px 48px;
+  padding: 40px 24px 24px;
 }
 
-/* each footer content group is a section — these are the columns */
 footer .footer .section {
   margin: 0;
   padding: 0;
@@ -26,7 +21,7 @@ footer .footer .default-content-wrapper {
 }
 
 footer .footer p {
-  margin: 0 0 8px;
+  margin: 0;
 }
 
 /* logo */
@@ -35,17 +30,33 @@ footer .footer img {
   height: 44px;
 }
 
-/* Follow Us section — label + social icons on one row (WKND) */
-footer .footer .section:nth-child(3) {
-  display: flex;
-  align-items: center;
-  gap: 20px;
+/* nav links */
+footer .footer .section:nth-child(2) ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
+footer .footer .section:nth-child(2) li {
+  margin: 0 0 8px;
+}
+
+footer .footer a:any-link {
+  color: #ebebeb;
+  text-decoration: none;
+}
+
+footer .footer a:hover {
+  color: var(--brand-yellow);
+  text-decoration: none;
+}
+
+/* Follow Us label */
 footer .footer .section:nth-child(3) p:first-child {
   margin: 0;
-  color: #fff;
-  font-size: 14px;
+  color: #ebebeb;
+  font-size: 16px;
+  font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
   white-space: nowrap;
@@ -55,60 +66,32 @@ footer .footer .section:nth-child(3) p:first-child strong {
   font-weight: 600;
 }
 
-/* link lists */
-footer .footer ul {
+/* social icons — WKND: light grey boxes with dark icons */
+footer .footer .section:nth-child(3) ul {
   list-style: none;
+  display: flex;
+  gap: 4px;
   margin: 0;
   padding: 0;
 }
 
-footer .footer li {
-  margin: 0 0 8px;
-}
-
-/* nav links (section 2) — horizontal row like WKND */
-@media (width >= 900px) {
-  footer .footer .section:nth-child(2) ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 32px;
-  }
-
-  footer .footer .section:nth-child(2) li {
-    margin: 0;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 14px;
-  }
-}
-
-footer .footer a:any-link {
-  color: #ebebeb;
-  text-decoration: none;
-}
-
-footer .footer a:hover {
-  color: #fff;
-  text-decoration: underline;
-}
-
-/* social icon links (Follow Us) */
-footer .footer .section:nth-child(3) ul {
-  display: flex;
-  gap: 16px;
+footer .footer .section:nth-child(3) li {
+  margin: 0;
 }
 
 footer .footer .footer-social-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 32px;
-  height: 32px;
-  color: #fff;
+  width: 48px;
+  height: 48px;
+  background-color: #ebebeb;
+  color: var(--brand-dark);
 }
 
 footer .footer .footer-social-link:hover {
-  color: var(--brand-yellow);
+  background-color: #fff;
+  color: var(--brand-dark);
   text-decoration: none;
 }
 
@@ -123,32 +106,54 @@ footer .footer .footer-social-link .icon img {
   height: 100%;
 }
 
-/* description / copyright */
+/* copyright + description */
 /* stylelint-disable-next-line no-descending-specificity */
 footer .footer .section:last-child p {
-  color: #b0b0b0;
-  font-size: 14px;
+  color: #f7f7f7;
+  font-size: 12px;
   line-height: 1.5;
+  margin: 0 0 12px;
+}
+
+footer .footer .section:last-child a:any-link {
+  color: #f7f7f7;
+  text-decoration: underline;
 }
 
 @media (width >= 900px) {
-  /* top band: logo | nav (left group) | Follow Us (far right) */
+  /* top band: logo | nav (left group) | Follow Us + social (far right) */
   footer .footer > div {
+    display: grid;
     grid-template-columns: auto auto 1fr;
     align-items: center;
-    padding: 48px 32px 32px;
+    gap: 0 48px;
+    padding: 40px 72px 24px;
   }
 
-  /* Follow Us pushed to the far right of the top band */
+  footer .footer .section:nth-child(2) ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+
+  footer .footer .section:nth-child(2) li {
+    margin: 0;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Follow Us label + icons on one row, pushed to the far right */
   footer .footer .section:nth-child(3) {
+    display: flex;
+    align-items: center;
+    gap: 20px;
     justify-self: end;
   }
 
-  /* description spans full width below the top band */
+  /* copyright + description span full width below the top band */
   footer .footer .section:last-child {
     grid-column: 1 / -1;
-    margin-top: 16px;
-    border-top: 1px solid rgb(255 255 255 / 15%);
-    padding-top: 24px;
+    margin-top: 24px;
   }
 }
