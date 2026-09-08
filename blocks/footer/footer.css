@@ -35,13 +35,20 @@ footer .footer img {
   height: 44px;
 }
 
-/* section label (Follow Us) */
+/* Follow Us section — label + social icons on one row (WKND) */
+footer .footer .section:nth-child(3) {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
 footer .footer .section:nth-child(3) p:first-child {
-  margin: 0 0 12px;
+  margin: 0;
   color: #fff;
   font-size: 14px;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
 footer .footer .section:nth-child(3) p:first-child strong {
@@ -57,6 +64,22 @@ footer .footer ul {
 
 footer .footer li {
   margin: 0 0 8px;
+}
+
+/* nav links (section 2) — horizontal row like WKND */
+@media (width >= 900px) {
+  footer .footer .section:nth-child(2) ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 32px;
+  }
+
+  footer .footer .section:nth-child(2) li {
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-size: 14px;
+  }
 }
 
 footer .footer a:any-link {
@@ -109,13 +132,19 @@ footer .footer .section:last-child p {
 }
 
 @media (width >= 900px) {
+  /* top band: logo | nav (left group) | Follow Us (far right) */
   footer .footer > div {
-    grid-template-columns: auto 1fr 1fr;
-    align-items: start;
+    grid-template-columns: auto auto 1fr;
+    align-items: center;
     padding: 48px 32px 32px;
   }
 
-  /* description spans full width below the columns */
+  /* Follow Us pushed to the far right of the top band */
+  footer .footer .section:nth-child(3) {
+    justify-self: end;
+  }
+
+  /* description spans full width below the top band */
   footer .footer .section:last-child {
     grid-column: 1 / -1;
     margin-top: 16px;

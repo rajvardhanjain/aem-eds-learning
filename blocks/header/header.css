@@ -4,7 +4,6 @@ header .nav-wrapper {
   width: 100%;
   z-index: 2;
   position: fixed;
-  border-bottom: 1px solid #ebebeb;
 }
 
 header nav {
@@ -311,10 +310,11 @@ header .nav-utility {
 header .nav-utility-inner {
   max-width: 1264px;
   margin: auto;
-  padding: 6px 24px;
+  padding: 4px 24px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-end;
+  gap: 28px;
 }
 
 /* stylelint-disable no-descending-specificity */

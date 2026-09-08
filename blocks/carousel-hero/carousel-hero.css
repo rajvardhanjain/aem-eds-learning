@@ -74,10 +74,11 @@
 }
 
 @media (width >= 900px) {
+  /* WKND: card is ~1192px wide, inset 44px, overlaps image bottom, padding 0 28px */
   .carousel-hero .carousel-hero-slide-content {
     width: auto;
-    margin: -120px 44px 0;
-    padding: 40px 48px 44px;
+    margin: -150px 44px 0;
+    padding: 36px 28px;
   }
 }
 
