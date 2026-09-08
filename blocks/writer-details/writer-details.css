@@ -1,0 +1,43 @@
+.writer-details .writer-details-person {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.writer-details .writer-details-avatar {
+  flex: 0 0 auto;
+  line-height: 0;
+}
+
+.writer-details .writer-details-avatar img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.writer-details .writer-details-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.writer-details .writer-details-name {
+  margin: 0;
+  font-size: var(--heading-font-size-s);
+  font-weight: 700;
+}
+
+.writer-details .writer-details-role {
+  margin: 0;
+  color: var(--text-color);
+  font-size: var(--body-font-size-s);
+  opacity: 0.75;
+}
+
+@media (width >= 900px) {
+  .writer-details .writer-details-avatar img {
+    width: 80px;
+    height: 80px;
+  }
+}
