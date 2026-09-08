@@ -70,7 +70,7 @@ footer .footer .section:nth-child(3) p:first-child strong {
 footer .footer .section:nth-child(3) ul {
   list-style: none;
   display: flex;
-  gap: 4px;
+  gap: 0;
   margin: 0;
   padding: 0;
 }
@@ -145,10 +145,13 @@ footer .footer .section:last-child a:any-link {
 
   /* Follow Us label + icons on one row, pushed to the far right */
   footer .footer .section:nth-child(3) {
+    justify-self: end;
+  }
+
+  footer .footer .section:nth-child(3) .default-content-wrapper {
     display: flex;
     align-items: center;
     gap: 20px;
-    justify-self: end;
   }
 
   /* copyright + description span full width below the top band */
