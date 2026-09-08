@@ -294,6 +294,14 @@ main img {
   width: 100%;
 }
 
+/* Constrain large standalone images in default content (e.g. teaser images)
+   so they read as a contained teaser rather than a full-bleed hero. */
+main .default-content-wrapper p picture img {
+  max-height: 480px;
+  width: auto;
+  object-fit: cover;
+}
+
 /* sections */
 main > .section {
   margin: 40px 0;
