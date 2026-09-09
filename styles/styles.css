@@ -114,6 +114,16 @@ main h2::after {
   border-bottom: 2px solid var(--brand-yellow);
 }
 
+/* detail/article page titles (h1) carry the same yellow underline accent */
+body.adventure-detail main h1::after,
+body.magazine-article main h1::after {
+  content: "";
+  display: block;
+  width: 84px;
+  margin-top: 12px;
+  border-bottom: 2px solid var(--brand-yellow);
+}
+
 /* WKND breadcrumb (detail/article pages): the imported breadcrumb is an ordered
    list; render it inline, no markers, uppercase, with a "›" separator — matching
    the source .cmp-breadcrumb (inline items, list-style none, 14px uppercase). */
@@ -187,7 +197,7 @@ a:hover {
 
 /* buttons — WKND style: squared, uppercase, yellow accent */
 p.button-wrapper {
-  margin: 12px 0;
+  margin: 24px 0;
 }
 
 a.button:any-link,
@@ -223,6 +233,13 @@ button.button:hover {
   background-color: var(--brand-yellow-hover);
   color: var(--brand-dark);
   text-decoration: none;
+}
+
+/* keyboard focus outline for accessibility */
+a.button:focus-visible,
+button.button:focus-visible {
+  outline: 2px solid var(--brand-dark);
+  outline-offset: 2px;
 }
 
 a.button[aria-disabled="true"],
