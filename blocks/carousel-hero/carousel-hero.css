@@ -110,6 +110,13 @@
   margin-top: 16px;
 }
 
+/* Controls band below the image: centered dots with the prev/next arrows
+   right-aligned in the same row (source layout). The nav is the positioning
+   context for the absolutely right-aligned arrows. */
+.carousel-hero nav[aria-label] {
+  position: relative;
+}
+
 /* Dot indicators — centered below (source: active rgb(0 0 0 / 80%), inactive rgb(175 175 175), 10px) */
 .carousel-hero .carousel-hero-slide-indicators {
   display: flex;
@@ -191,20 +198,16 @@
 }
 
 @media (width >= 900px) {
-  /* Pin the arrows to the image bottom-right (source: they sit at the image
-     bottom, in the right gutter beyond the ~1192px card — NOT in a row below
-     the content). Absolute against the slides container so text length in the
-     card never pushes them down. */
-  .carousel-hero .carousel-hero-slides-container {
-    position: relative;
-  }
-
+  /* Arrows right-aligned in the controls band, vertically centered on the dots
+     row (source: prev/next sit to the right of the centered dots below the
+     image, not over it). Absolute-right within the controls nav. */
   .carousel-hero .carousel-hero-navigation-buttons {
     position: absolute;
+    top: 50%;
     right: 13px;
-    bottom: 4px;
     z-index: 3;
     padding: 0;
+    transform: translateY(-50%);
   }
 }
 

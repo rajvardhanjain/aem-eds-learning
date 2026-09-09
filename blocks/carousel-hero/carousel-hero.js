@@ -152,9 +152,14 @@ export default async function decorate(block) {
   });
 
   container.append(slidesWrapper);
-  // Arrow row sits below the slides, aligned to the bottom-right (source layout).
-  if (slideNavButtons) container.append(slideNavButtons);
   block.prepend(container);
+
+  // Arrows live in the controls band below the image, right-aligned, sharing the
+  // row with the centered dots (source layout). Appending into the indicators
+  // nav keeps them out of the image so the dark chevrons stay visible.
+  if (slideNavButtons && slideIndicators) {
+    slideIndicators.parentElement.append(slideNavButtons);
+  }
 
   if (!isSingleSlide) {
     bindEvents(block);
