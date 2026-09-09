@@ -439,6 +439,22 @@ body.magazine-article main blockquote {
   }
 }
 
+/* ===== FAQs page (body.faqs) ===== */
+
+/* FAQs page title carries the short yellow underline accent (source: 84px #ffea00) */
+body.faqs main h1::after {
+  content: "";
+  display: block;
+  width: 84px;
+  margin-top: 12px;
+  border-bottom: 2px solid var(--brand-yellow);
+}
+
+/* constrain the FAQ column to WKND's readable width (source ~1164px) */
+body.faqs main > .section > div {
+  max-width: 1164px;
+}
+
 main .section.dark {
   background-color: var(--brand-dark);
   color: #fff;
