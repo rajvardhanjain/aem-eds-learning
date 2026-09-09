@@ -18,35 +18,35 @@
   --light-color: #f8f8f8;
   --dark-color: #202020;
   --text-color: #202020;
-  --link-color: #0045ff;
-  --link-hover-color: #0035c7;
+  --link-color: #202020;
+  --link-hover-color: #ebeb00;
 
   /* fonts (WKND: Asar headings, Source Sans Pro body) */
   --body-font-family: "Source Sans Pro", "Helvetica Neue", helvetica, arial, sans-serif;
   --heading-font-family: "Asar", georgia, "Times New Roman", times, serif;
 
-  /* body sizes */
-  --body-font-size-m: 18px;
-  --body-font-size-s: 16px;
-  --body-font-size-xs: 14px;
+  /* body sizes (WKND: 16/14/13) */
+  --body-font-size-m: 16px;
+  --body-font-size-s: 14px;
+  --body-font-size-xs: 13px;
 
-  /* heading sizes (mobile) */
-  --heading-font-size-xxl: 36px;
-  --heading-font-size-xl: 28px;
+  /* heading sizes (desktop values from WKND) */
+  --heading-font-size-xxl: 40px;
+  --heading-font-size-xl: 36px;
   --heading-font-size-l: 24px;
-  --heading-font-size-m: 20px;
-  --heading-font-size-s: 18px;
+  --heading-font-size-m: 16px;
+  --heading-font-size-s: 14px;
   --heading-font-size-xs: 16px;
 
   /* nav height */
   --nav-height: 64px;
 }
 
-@media (width >= 900px) {
+@media (width <= 900px) {
   :root {
-    /* heading sizes (desktop — from WKND computed values) */
-    --heading-font-size-xxl: 40px;
-    --heading-font-size-xl: 36px;
+    /* mobile heading sizes */
+    --heading-font-size-xxl: 36px;
+    --heading-font-size-xl: 28px;
     --heading-font-size-l: 24px;
     --heading-font-size-m: 20px;
     --heading-font-size-s: 18px;
@@ -104,6 +104,50 @@ h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
 
+/* WKND: section headings (h2) carry a short yellow underline accent
+   (source: 84px, 2px #ffea00 via ::after) */
+main h2::after {
+  content: "";
+  display: block;
+  width: 84px;
+  margin-top: 8px;
+  border-bottom: 2px solid var(--brand-yellow);
+}
+
+/* detail/article page titles (h1) carry the same yellow underline accent */
+body.adventure-detail main h1::after,
+body.magazine-article main h1::after {
+  content: "";
+  display: block;
+  width: 84px;
+  margin-top: 12px;
+  border-bottom: 2px solid var(--brand-yellow);
+}
+
+/* WKND breadcrumb (detail/article pages): the imported breadcrumb is an ordered
+   list; render it inline, no markers, uppercase, with a "›" separator — matching
+   the source .cmp-breadcrumb (inline items, list-style none, 14px uppercase). */
+main .default-content-wrapper > ol {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  font-size: 14px;
+}
+
+main .default-content-wrapper > ol li {
+  display: inline;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--text-color);
+}
+
+main .default-content-wrapper > ol li + li::before {
+  content: "›";
+  margin: 0 8px;
+  color: var(--text-color);
+}
+
+/* stylelint-disable no-descending-specificity */
 p,
 dl,
 ol,
@@ -113,6 +157,7 @@ blockquote {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
 }
+/* stylelint-enable no-descending-specificity */
 
 code,
 pre {
@@ -152,7 +197,7 @@ a:hover {
 
 /* buttons — WKND style: squared, uppercase, yellow accent */
 p.button-wrapper {
-  margin: 12px 0;
+  margin: 24px 0;
 }
 
 a.button:any-link,
@@ -188,6 +233,13 @@ button.button:hover {
   background-color: var(--brand-yellow-hover);
   color: var(--brand-dark);
   text-decoration: none;
+}
+
+/* keyboard focus outline for accessibility */
+a.button:focus-visible,
+button.button:focus-visible {
+  outline: 2px solid var(--brand-dark);
+  outline-offset: 2px;
 }
 
 a.button[aria-disabled="true"],
@@ -330,6 +382,94 @@ main .section.grey {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+/* ===== Magazine article page (body.magazine-article) ===== */
+
+/* WKND articles use a narrow, airy readable column (source prose ~776px wide,
+   18px / 45px line-height) rather than the full 1200px content width. */
+body.magazine-article main > .section > div {
+  max-width: 840px;
+}
+
+body.magazine-article main p {
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+/* pull-quote: plain (no border), Source Sans Pro, indented (source: 18px/27px,
+   margin 18px 40px) */
+body.magazine-article main blockquote {
+  margin: 18px 40px;
+  padding: 0;
+  border: 0;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-style: normal;
+  line-height: 27px;
+  color: var(--text-color);
+}
+
+/* ===== Adventure detail page (body.adventure-detail) ===== */
+
+/* WKND adventure pages: full-width lead gallery + title on top, then a narrow
+   spec sidebar (~291px, left) beside the wide tabbed content (~845px, right).
+   My content is a single section stacking: breadcrumb, gallery, title, specs,
+   share heading, social, tabs — place them into a 2-column grid on desktop. */
+@media (width >= 900px) {
+  body.adventure-detail main > .section {
+    display: grid;
+    grid-template-columns: 291px 1fr;
+    column-gap: 32px;
+    align-items: start;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 32px;
+  }
+
+  /* the section wrappers already center at 1200px; inside the grid they should
+     fill their column instead */
+  body.adventure-detail main > .section > div {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* full-width row: breadcrumb, lead gallery, title/intro (first 3 wrappers) */
+  body.adventure-detail main > .section > .default-content-wrapper:nth-child(1),
+  body.adventure-detail main > .section > .carousel-gallery-wrapper,
+  body.adventure-detail main > .section > .default-content-wrapper:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  /* left sidebar: spec list + share heading + social links */
+  body.adventure-detail main > .section > .columns-details-wrapper,
+  body.adventure-detail main > .section > .default-content-wrapper:nth-child(5),
+  body.adventure-detail main > .section > .social-links-wrapper {
+    grid-column: 1;
+  }
+
+  /* right column: tabbed content */
+  body.adventure-detail main > .section > .tabs-content-wrapper {
+    grid-column: 2;
+    grid-row: 4 / 7;
+  }
+}
+
+/* ===== FAQs page (body.faqs) ===== */
+
+/* FAQs page title carries the short yellow underline accent (source: 84px #ffea00) */
+body.faqs main h1::after {
+  content: "";
+  display: block;
+  width: 84px;
+  margin-top: 12px;
+  border-bottom: 2px solid var(--brand-yellow);
+}
+
+/* constrain the FAQ column to WKND's readable width (source ~1164px) */
+body.faqs main > .section > div {
+  max-width: 1164px;
 }
 
 main .section.dark {
