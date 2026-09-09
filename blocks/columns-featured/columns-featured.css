@@ -1,10 +1,10 @@
 /* Block: columns-featured — CSS extracted from WKND featured teaser computed styles.
    Source: .teaser.cmp-teaser--featured on https://wknd.site/us/en.html */
 
-/* Source insets the teaser 14px each side inside the content column and adds an
-   18px gap below it (measured: teaser x=152 within a 138px-gutter column). */
+/* Source adds an 18px gap below the featured teaser. Horizontal alignment now
+   comes from the section content column (1136px @ x152), so no side inset. */
 .columns-featured {
-  margin: 0 14px 18px;
+  margin: 0 0 18px;
 }
 
 /* Row: image cell + text cell. Mobile-first (stacked). */
