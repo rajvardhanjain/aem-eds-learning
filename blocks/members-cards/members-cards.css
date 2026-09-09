@@ -1,0 +1,74 @@
+/* members-cards — compact teaser cards (WKND "Members Only" promos).
+   Source: .cmp-teaser--list.cmp-teaser--secure on wknd.site/us/en/magazine.
+   Layout: title → description → CTA, then the image below. Mobile stacks;
+   desktop shows a 2-up row. */
+
+.members-cards > ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  align-items: start;
+}
+
+.members-cards > ul > li {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+/* body: title, description, CTA (sits above the image, per source) */
+.members-cards .members-cards-card-body h2,
+.members-cards .members-cards-card-body h3 {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  text-transform: uppercase;
+  color: var(--text-color);
+}
+
+.members-cards .members-cards-card-body p {
+  margin: 9px 0 0;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 24.5px;
+  color: #696969;
+}
+
+/* "Read More" CTA — plain uppercase link (source is a text link, not a button) */
+.members-cards .members-cards-card-body p a:any-link {
+  color: var(--text-color);
+  font-weight: 600;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.members-cards .members-cards-card-body p a:hover {
+  color: var(--link-color);
+}
+
+/* image below the text */
+.members-cards .members-cards-card-image {
+  margin-top: 14px;
+  line-height: 0;
+}
+
+.members-cards .members-cards-card-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 9 / 5;
+  object-fit: cover;
+}
+
+@media (width >= 900px) {
+  .members-cards > ul {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+  }
+}

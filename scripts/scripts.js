@@ -90,12 +90,17 @@ function buildWidgetAutoBlocks(main) {
  */
 function buildHeroTeaserAutoBlocks(main) {
   main.querySelectorAll(':scope > div > div.default-content-wrapper').forEach((wrapper) => {
-    // find a paragraph whose only content is a single image (the hero image)
-    const imgP = [...wrapper.querySelectorAll(':scope > p')].find((p) => {
+    // lone-image paragraphs (an image that is the only content of its <p>)
+    const imageParagraphs = [...wrapper.querySelectorAll(':scope > p')].filter((p) => {
       const pic = p.querySelector('picture, img');
       return pic && p.textContent.trim() === '' && !p.querySelector('a');
     });
-    if (!imgP) return;
+    // Only treat this as a single full-bleed hero when there is exactly ONE such
+    // image in the wrapper (e.g. the homepage "Climbing New Zealand" promo). A
+    // wrapper with several lone images is a multi-card layout (e.g. the magazine
+    // "Members Only" teasers) and must NOT be collapsed into one hero.
+    if (imageParagraphs.length !== 1) return;
+    const imgP = imageParagraphs[0];
 
     // the heading that starts this teaser is the nearest heading before the image
     let heading = imgP.previousElementSibling;
@@ -128,6 +133,69 @@ function buildHeroTeaserAutoBlocks(main) {
     heading.parentElement.insertBefore(block, heading);
     cardNodes.forEach((n) => n.remove());
     imgP.remove();
+  });
+}
+
+/**
+ * Turn a repeating "teaser card" default-content pattern into a cards grid.
+ *
+ * WKND authors the magazine "Members Only" promos as loose default content: a
+ * pair of {heading, description, "Read More", image} runs. The source renders
+ * them as a row of compact cards (title, description, CTA, then image below).
+ * We detect two-or-more lone-image paragraphs in one wrapper — each preceded by
+ * a heading — and group each run into a card inside a `members-cards` block.
+ *
+ * Narrow by design: only fires when there are >= 2 such image runs, so it never
+ * touches single-hero sections (handled by buildHeroTeaserAutoBlocks) or normal
+ * prose.
+ * @param {Element} main The container element
+ */
+function buildMembersCardsAutoBlocks(main) {
+  main.querySelectorAll(':scope > div > div.default-content-wrapper').forEach((wrapper) => {
+    const imageParagraphs = [...wrapper.querySelectorAll(':scope > p')].filter((p) => {
+      const pic = p.querySelector('picture, img');
+      return pic && p.textContent.trim() === '' && !p.querySelector('a');
+    });
+    if (imageParagraphs.length < 2) return;
+
+    // Build one card per image: the image plus the heading + siblings that
+    // precede it (back to the previous image, exclusive).
+    const cards = [];
+    let boundary = null; // the previous image paragraph
+    imageParagraphs.forEach((imgP) => {
+      // nearest heading before this image (but after the previous image)
+      let heading = imgP.previousElementSibling;
+      while (heading && heading !== boundary && !/^H[1-6]$/.test(heading.tagName)) {
+        heading = heading.previousElementSibling;
+      }
+      if (!heading || heading === boundary) { boundary = imgP; return; }
+
+      // collect heading .. just-before-image (title, description, CTA)
+      const bodyNodes = [];
+      let node = heading;
+      while (node && node !== imgP) { bodyNodes.push(node); node = node.nextElementSibling; }
+
+      cards.push({
+        img: imgP.querySelector('picture, img'),
+        body: bodyNodes,
+        anchorEl: heading,
+        imgP,
+      });
+      boundary = imgP;
+    });
+    if (cards.length < 2) return;
+
+    // Build a cards-style block: one row per card, each row = [image][body].
+    const rows = cards.map((c) => [
+      { elems: [c.img.cloneNode(true)] },
+      { elems: c.body.map((n) => n.cloneNode(true)) },
+    ]);
+    const block = buildBlock('members-cards', rows);
+
+    // insert before the first card's heading, then remove original nodes
+    const first = cards[0].anchorEl;
+    first.parentElement.insertBefore(block, first);
+    cards.forEach((c) => { c.body.forEach((n) => n.remove()); c.imgP.remove(); });
   });
 }
 
@@ -210,9 +278,11 @@ export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
-  // hero-teaser autoblock runs after sections exist (it targets
-  // .default-content-wrapper) and before decorateBlocks so the new block loads.
+  // hero-teaser + members-cards autoblocks run after sections exist (they
+  // target .default-content-wrapper) and before decorateBlocks so the new
+  // blocks are decorated/loaded.
   buildHeroTeaserAutoBlocks(main);
+  buildMembersCardsAutoBlocks(main);
   decorateBlocks(main);
   decorateButtons(main);
 }
