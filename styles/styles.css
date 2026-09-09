@@ -117,21 +117,21 @@ main h2::after {
 /* WKND breadcrumb (detail/article pages): the imported breadcrumb is an ordered
    list; render it inline, no markers, uppercase, with a "›" separator — matching
    the source .cmp-breadcrumb (inline items, list-style none, 14px uppercase). */
-main .default-content-wrapper > ol:first-child {
+main .default-content-wrapper > ol {
   list-style: none;
   margin: 0 0 16px;
   padding: 0;
   font-size: 14px;
 }
 
-main .default-content-wrapper > ol:first-child li {
+main .default-content-wrapper > ol li {
   display: inline;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   color: var(--text-color);
 }
 
-main .default-content-wrapper > ol:first-child li + li::before {
+main .default-content-wrapper > ol li + li::before {
   content: "›";
   margin: 0 8px;
   color: var(--text-color);
