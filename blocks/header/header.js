@@ -238,4 +238,19 @@ export default async function decorate(block) {
   navWrapper.className = 'nav-wrapper';
   navWrapper.append(nav);
   block.append(navWrapper);
+
+  // Shrink-on-scroll (desktop): the source header minimizes its tall white row
+  // once the page is scrolled. Toggle a class the CSS keys off. Passive listener
+  // + rAF guard so it never blocks scrolling.
+  let ticking = false;
+  const onScroll = () => {
+    if (ticking) return;
+    ticking = true;
+    window.requestAnimationFrame(() => {
+      navWrapper.classList.toggle('nav-scrolled', window.scrollY > 40);
+      ticking = false;
+    });
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 }
