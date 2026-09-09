@@ -74,6 +74,60 @@ function buildWidgetAutoBlocks(main) {
 }
 
 /**
+ * Turn a "hero teaser" default-content pattern into a hero-static block.
+ *
+ * WKND authors some sections (e.g. the homepage "Climbing New Zealand" promo)
+ * as loose default content: a heading, a description paragraph, a lone CTA
+ * link, and a lone image paragraph. The source renders this as a full-bleed
+ * image with an overlapping white card. We detect that exact shape — an image
+ * that is the only child of its own paragraph, immediately preceded by a
+ * heading + text + a lone-link CTA — and wrap it into a `hero-static` block
+ * ([image] row + [heading, text, cta] row).
+ *
+ * This is intentionally narrow so it only fires on that authored pattern and
+ * never disturbs other content.
+ * @param {Element} main The container element
+ */
+function buildHeroTeaserAutoBlocks(main) {
+  main.querySelectorAll(':scope > div > div.default-content-wrapper').forEach((wrapper) => {
+    // find a paragraph whose only content is a single image (the hero image)
+    const imgP = [...wrapper.querySelectorAll(':scope > p')].find((p) => {
+      const pic = p.querySelector('picture, img');
+      return pic && p.textContent.trim() === '' && !p.querySelector('a');
+    });
+    if (!imgP) return;
+
+    // the heading that starts this teaser is the nearest heading before the image
+    let heading = imgP.previousElementSibling;
+    while (heading && !/^H[1-6]$/.test(heading.tagName)) {
+      heading = heading.previousElementSibling;
+    }
+    if (!heading) return;
+
+    // collect the card content: the heading and every sibling up to (not
+    // including) the image — that's the title, description and CTA.
+    const cardNodes = [];
+    let node = heading;
+    while (node && node !== imgP) {
+      const next = node.nextElementSibling;
+      cardNodes.push(node);
+      node = next;
+    }
+
+    const block = buildBlock('hero-static', [
+      [{ elems: [imgP.querySelector('picture, img').cloneNode(true)] }],
+      [{ elems: cardNodes.map((n) => n.cloneNode(true)) }],
+    ]);
+
+    // insert the block where the heading was, then remove the original nodes.
+    // decorateBlocks (called next in decorateMain) will decorate/load it.
+    heading.parentElement.insertBefore(block, heading);
+    cardNodes.forEach((n) => n.remove());
+    imgP.remove();
+  });
+}
+
+/**
  * Builds all synthetic blocks in a container element.
  * @param {Element} main The container element
  */
@@ -152,6 +206,9 @@ export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  // hero-teaser autoblock runs after sections exist (it targets
+  // .default-content-wrapper) and before decorateBlocks so the new block loads.
+  buildHeroTeaserAutoBlocks(main);
   decorateBlocks(main);
   decorateButtons(main);
 }
