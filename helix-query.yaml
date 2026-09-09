@@ -1,4 +1,5 @@
 version: 1
+# config rev: adventures index active
 
 indices:
   # Site-wide index of all published WKND pages, consumed by the sitemap.
@@ -28,6 +29,28 @@ indices:
       # the Magazine landing page itself is not an article
       - '/us/en/magazine'
     target: /us/en/magazine/query-index.json
+    properties:
+      title:
+        select: head > meta[property="og:title"]
+        value: attribute(el, 'content')
+      description:
+        select: head > meta[name="description"]
+        value: attribute(el, 'content')
+      image:
+        select: head > meta[property="og:image"]
+        value: attribute(el, 'content')
+      lastModified:
+        select: none
+        value: parseTimestamp(headers('last-modified'), 'ddd, DD MMM YYYY hh:mm:ss GMT')
+
+  # Index of WKND Adventure detail pages, consumed by the article-list block.
+  adventures:
+    include:
+      - '/us/en/adventures/**'
+    exclude:
+      # the Adventures landing page itself is not an adventure detail
+      - '/us/en/adventures'
+    target: /us/en/adventures/query-index.json
     properties:
       title:
         select: head > meta[property="og:title"]
