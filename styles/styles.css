@@ -104,6 +104,16 @@ h4 { font-size: var(--heading-font-size-m); }
 h5 { font-size: var(--heading-font-size-s); }
 h6 { font-size: var(--heading-font-size-xs); }
 
+/* WKND: section headings (h2) carry a short yellow underline accent
+   (source: 84px, 2px #ffea00 via ::after) */
+main h2::after {
+  content: "";
+  display: block;
+  width: 84px;
+  margin-top: 8px;
+  border-bottom: 2px solid var(--brand-yellow);
+}
+
 p,
 dl,
 ol,
