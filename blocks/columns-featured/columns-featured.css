@@ -1,6 +1,12 @@
 /* Block: columns-featured — CSS extracted from WKND featured teaser computed styles.
    Source: .teaser.cmp-teaser--featured on https://wknd.site/us/en.html */
 
+/* Source insets the teaser 14px each side inside the content column and adds an
+   18px gap below it (measured: teaser x=152 within a 138px-gutter column). */
+.columns-featured {
+  margin: 0 14px 18px;
+}
+
 /* Row: image cell + text cell. Mobile-first (stacked). */
 .columns-featured > div {
   display: flex;
@@ -46,13 +52,14 @@
   color: var(--text-color);
 }
 
-/* Pretitle (first paragraph, e.g. "Featured Article") — higher specificity wins */
+/* Pretitle (first paragraph, e.g. "Featured Article") — higher specificity wins.
+   Source line-height is 45px (2.5 × 18px), giving the label its tall airy band. */
 .columns-featured > div > div > p:first-of-type {
   margin: 0 0 13.5px;
   font-family: var(--body-font-family);
   font-size: 18px;
   font-weight: 700;
-  line-height: 1.4;
+  line-height: 45px;
   color: var(--text-color);
 }
 
@@ -77,7 +84,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 2px solid var(--brand-yellow);
+  border: 0;
   border-radius: 0;
   padding: 14px 35px;
   background-color: var(--brand-yellow);
@@ -86,14 +93,13 @@
   font-size: 14px;
   font-weight: 600;
   line-height: 1.25;
-  letter-spacing: 0.5px;
+  letter-spacing: normal;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background-color 0.2s ease, border-color 0.2s ease;
+  transition: background-color 0.2s ease;
 }
 
 .columns-featured > div > div > p:last-child a:hover {
-  border-color: var(--brand-yellow-hover);
   background-color: var(--brand-yellow-hover);
   color: var(--brand-dark);
   text-decoration: none;
