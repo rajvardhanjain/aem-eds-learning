@@ -72,20 +72,18 @@
     padding: 18px 28px 44px;
   }
 
-  /* Auto-blocked teaser variant (homepage "Climbing New Zealand"): the card
-   * carries a CTA so it is taller than the fixed -180px overlap, which left it
-   * hanging below the image. Anchor it to the image bottom so it stays flush
-   * regardless of its height (source: card bottom aligns with image bottom). */
+  /* Auto-blocked teaser variant (homepage "Climbing New Zealand"): the image is
+   * full-bleed to the viewport edges (source: 100vw), and the card is a centered
+   * ~1192px column that overlaps the image bottom by -180px and naturally
+   * extends below it with the CTA hanging below — matching the WKND source
+   * (which keeps the card in flow, NOT anchored flush). */
   /* stylelint-disable-next-line no-descending-specificity */
-  .hero-static-teaser > div:last-child {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    margin-top: 0;
+  .hero-static-teaser > div:first-child {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
   }
 
-  /* keep the centered ~1192px card width the source uses */
   .hero-static-teaser > div:last-child > div {
     max-width: 1192px;
     margin: 0 auto;
