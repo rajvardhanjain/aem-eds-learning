@@ -10,11 +10,23 @@ const isDesktop = window.matchMedia('(min-width: 900px)');
  * @returns {{ doc: Element, base: string }|null}
  */
 async function fetchNav() {
-  let base = '/content/';
-  let resp = await fetch('/content/nav.plain.html');
+  // Pick the correct path up front to avoid a 404 in the console: the local
+  // `aem up` preview serves pages under /content/, production (.aem.page/.live)
+  // does not. Try the likely path first based on the current pathname, and only
+  // fall back to the other if it genuinely isn't there.
+  const underContent = window.location.pathname.startsWith('/content/');
+  const primary = underContent
+    ? { base: '/content/', url: '/content/nav.plain.html' }
+    : { base: '/', url: '/nav.plain.html' };
+  const fallback = underContent
+    ? { base: '/', url: '/nav.plain.html' }
+    : { base: '/content/', url: '/content/nav.plain.html' };
+
+  let { base } = primary;
+  let resp = await fetch(primary.url);
   if (!resp.ok) {
-    base = '/';
-    resp = await fetch('/nav.plain.html');
+    base = fallback.base;
+    resp = await fetch(fallback.url);
   }
   if (!resp.ok) return null;
   const html = await resp.text();
