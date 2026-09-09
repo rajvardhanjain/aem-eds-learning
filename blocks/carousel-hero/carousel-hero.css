@@ -74,14 +74,22 @@
 }
 
 @media (width >= 900px) {
-  /* WKND: card is a centered ~1192px column (not full-bleed), overlapping the
-     image bottom, padding 0 28px (source computed). */
+  /* WKND: the white card is anchored to the image bottom and overlaps UP into
+     it (source: card bottom is flush with the image bottom regardless of text
+     length). Absolutely position it against the slide so its bottom always
+     sits at the image bottom — this keeps the card from protruding below the
+     image (and keeps the arrow/dots band directly under the image). Centered
+     ~1192px column, padding 18px 28px (source computed). */
   .carousel-hero .carousel-hero-slide-content {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
     box-sizing: border-box;
     width: auto;
     max-width: 1192px;
-    margin: -150px auto 0;
-    padding: 36px 28px;
+    margin: 0 auto;
+    padding: 18px 28px;
   }
 }
 
@@ -133,9 +141,9 @@
   background-color: rgb(0 0 0 / 80%);
 }
 
-/* Prev / next — small plain chevrons grouped at the bottom-right, below the
-   slide content (source: .cmp-carousel__actions, static, right-aligned, no
-   button chrome; ~26x24 hit area with a 20px glyph). */
+/* Prev / next — small plain chevrons at the bottom-right of the image (source:
+   .cmp-carousel__actions sits at the image-bottom level on the right, in the
+   margin to the right of the white card; no button chrome; ~26x24 hit area). */
 .carousel-hero .carousel-hero-navigation-buttons {
   z-index: 2;
   display: flex;
@@ -183,11 +191,20 @@
 }
 
 @media (width >= 900px) {
-  /* Sit the arrow row at the far right, aligned under the centered card. */
+  /* Pin the arrows to the image bottom-right (source: they sit at the image
+     bottom, in the right gutter beyond the ~1192px card — NOT in a row below
+     the content). Absolute against the slides container so text length in the
+     card never pushes them down. */
+  .carousel-hero .carousel-hero-slides-container {
+    position: relative;
+  }
+
   .carousel-hero .carousel-hero-navigation-buttons {
-    max-width: 1192px;
-    margin: 0 auto;
-    padding: 16px 28px;
+    position: absolute;
+    right: 13px;
+    bottom: 4px;
+    z-index: 3;
+    padding: 0;
   }
 }
 
