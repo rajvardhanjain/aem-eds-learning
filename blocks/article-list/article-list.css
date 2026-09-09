@@ -2,6 +2,13 @@
 
 /* Shares the WKND cards-article visual language for consistency. */
 
+/* Reserve vertical space before the cards load (the list is populated async
+   from the query index) so injected cards don't shift content below (CLS).
+   Mobile stacks 1-up (tall); desktop is a 4-up row (short). */
+.article-list {
+  min-height: 1200px;
+}
+
 .article-list > ul {
   display: grid;
   grid-template-columns: 1fr;
@@ -76,10 +83,18 @@
   .article-list > ul {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .article-list {
+    min-height: 640px;
+  }
 }
 
 @media (width >= 900px) {
   .article-list > ul {
     grid-template-columns: repeat(4, 1fr);
+  }
+
+  .article-list {
+    min-height: 340px;
   }
 }
