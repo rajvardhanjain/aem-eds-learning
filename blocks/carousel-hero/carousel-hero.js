@@ -120,6 +120,7 @@ export default async function decorate(block) {
   block.prepend(slidesWrapper);
 
   let slideIndicators;
+  let slideNavButtons;
   if (!isSingleSlide) {
     const slideIndicatorsNav = document.createElement('nav');
     slideIndicatorsNav.setAttribute('aria-label', placeholders.carouselSlideControls || 'Carousel Slide Controls');
@@ -128,14 +129,12 @@ export default async function decorate(block) {
     slideIndicatorsNav.append(slideIndicators);
     block.append(slideIndicatorsNav);
 
-    const slideNavButtons = document.createElement('div');
+    slideNavButtons = document.createElement('div');
     slideNavButtons.classList.add('carousel-hero-navigation-buttons');
     slideNavButtons.innerHTML = `
       <button type="button" class= "slide-prev" aria-label="${placeholders.previousSlide || 'Previous Slide'}"></button>
       <button type="button" class="slide-next" aria-label="${placeholders.nextSlide || 'Next Slide'}"></button>
     `;
-
-    container.append(slideNavButtons);
   }
 
   rows.forEach((row, idx) => {
@@ -153,6 +152,8 @@ export default async function decorate(block) {
   });
 
   container.append(slidesWrapper);
+  // Arrow row sits below the slides, aligned to the bottom-right (source layout).
+  if (slideNavButtons) container.append(slideNavButtons);
   block.prepend(container);
 
   if (!isSingleSlide) {
