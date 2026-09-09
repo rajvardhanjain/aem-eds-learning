@@ -118,6 +118,10 @@ function buildHeroTeaserAutoBlocks(main) {
       [{ elems: [imgP.querySelector('picture, img').cloneNode(true)] }],
       [{ elems: cardNodes.map((n) => n.cloneNode(true)) }],
     ]);
+    // auto-generated variant: the card is anchored to the image bottom so it
+    // stays flush regardless of its own height (these teasers carry a CTA, so a
+    // fixed negative margin would let the card hang below the image).
+    block.classList.add('hero-static-teaser');
 
     // insert the block where the heading was, then remove the original nodes.
     // decorateBlocks (called next in decorateMain) will decorate/load it.

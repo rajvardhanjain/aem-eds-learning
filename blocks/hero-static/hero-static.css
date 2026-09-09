@@ -71,4 +71,23 @@
   .hero-static > div:last-child > div {
     padding: 18px 28px 44px;
   }
+
+  /* Auto-blocked teaser variant (homepage "Climbing New Zealand"): the card
+   * carries a CTA so it is taller than the fixed -180px overlap, which left it
+   * hanging below the image. Anchor it to the image bottom so it stays flush
+   * regardless of its height (source: card bottom aligns with image bottom). */
+  /* stylelint-disable-next-line no-descending-specificity */
+  .hero-static-teaser > div:last-child {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin-top: 0;
+  }
+
+  /* keep the centered ~1192px card width the source uses */
+  .hero-static-teaser > div:last-child > div {
+    max-width: 1192px;
+    margin: 0 auto;
+  }
 }
