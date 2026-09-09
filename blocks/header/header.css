@@ -232,16 +232,23 @@ header nav[aria-expanded='true'] {
 }
 
 @media (width >= 900px) {
-  /* the desktop nav (dark utility strip + tall white logo/nav row) is ~183px,
-     but styles.css reserves only --nav-height (64px) for the header, so the nav
-     overflows and paints over the top of the page content (e.g. the FAQs H1 and
-     the "Need more help?" sidebar). Let the header size to its real content. */
+  /* Fixed, shrink-on-scroll header (source: position fixed; the tall white row
+     minimizes as you scroll). Reserve the resting height (~134px = ~38px utility
+     strip + 96px brand row) in flow so content starts below the fixed bar. */
   header {
-    height: auto;
+    height: 134px;
   }
 
   header .nav-wrapper {
-    position: relative;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+
+  /* subtle lift once scrolled, matching a sticky header */
+  header .nav-wrapper.nav-scrolled {
+    box-shadow: 0 1px 8px rgb(0 0 0 / 12%);
   }
 
   /* utility bar spans full width above the main nav. The source white nav bar is
@@ -259,6 +266,21 @@ header nav[aria-expanded='true'] {
     padding: 0 32px;
     min-height: 0;
     overflow: visible;
+    transition: grid-template-rows 0.2s ease;
+  }
+
+  /* scrolled: minimize the tall brand row (source shrinks the white nav bar) */
+  header .nav-scrolled nav,
+  header .nav-scrolled nav[aria-expanded='true'] {
+    grid-template:
+      'utility utility utility' auto
+      'brand sections tools' 60px / auto 1fr auto;
+  }
+
+  /* shrink the logo in step with the row so it stays vertically centered */
+  header .nav-scrolled nav .nav-brand img {
+    width: 104px;
+    transition: width 0.2s ease;
   }
 
   /* dark utility strip — full-bleed #202020 band with light, right-aligned links
