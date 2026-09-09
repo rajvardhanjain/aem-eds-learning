@@ -74,10 +74,13 @@
 }
 
 @media (width >= 900px) {
-  /* WKND: card is ~1192px wide, inset 44px, overlaps image bottom, padding 0 28px */
+  /* WKND: card is a centered ~1192px column (not full-bleed), overlapping the
+     image bottom, padding 0 28px (source computed). */
   .carousel-hero .carousel-hero-slide-content {
+    box-sizing: border-box;
     width: auto;
-    margin: -150px 44px 0;
+    max-width: 1192px;
+    margin: -150px auto 0;
     padding: 36px 28px;
   }
 }
@@ -130,37 +133,35 @@
   background-color: rgb(0 0 0 / 80%);
 }
 
-/* Prev / next — subtle dark chevrons over the image, vertically centered */
+/* Prev / next — small plain chevrons grouped at the bottom-right, below the
+   slide content (source: .cmp-carousel__actions, static, right-aligned, no
+   button chrome; ~26x24 hit area with a 20px glyph). */
 .carousel-hero .carousel-hero-navigation-buttons {
-  position: absolute;
-  top: 50%;
-  left: 12px;
-  right: 12px;
   z-index: 2;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  transform: translateY(-50%);
+  justify-content: flex-end;
+  gap: 16px;
+  padding: 12px 16px;
 }
 
 /* stylelint-disable-next-line no-descending-specificity */
 .carousel-hero .carousel-hero-navigation-buttons button {
   position: relative;
-  width: 44px;
-  height: 44px;
+  width: 26px;
+  height: 24px;
   margin: 0;
   padding: 0;
   border: 0;
-  border-radius: 50%;
-  background-color: rgb(255 255 255 / 0%);
+  border-radius: 0;
+  background-color: transparent;
   color: var(--text-color);
   cursor: pointer;
-  transition: background-color 0.2s;
 }
 
 .carousel-hero .carousel-hero-navigation-buttons button:hover,
 .carousel-hero .carousel-hero-navigation-buttons button:focus-visible {
-  background-color: rgb(255 255 255 / 70%);
+  color: var(--link-hover-color, #ebeb00);
 }
 
 .carousel-hero .carousel-hero-navigation-buttons button::after {
@@ -168,8 +169,8 @@
   position: absolute;
   top: 50%;
   left: calc(50% + 2px);
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   border: 2px solid;
   border-bottom: 0;
   border-left: 0;
@@ -181,21 +182,27 @@
   transform: translate(-50%, -50%) rotate(45deg);
 }
 
-/* Desktop — content band overlaps image bottom, larger heading (source values) */
 @media (width >= 900px) {
-  .carousel-hero .carousel-hero-slide-content {
-    margin: -180px 44px 0;
-    padding: 18px 28px 28px;
+  /* Sit the arrow row at the far right, aligned under the centered card. */
+  .carousel-hero .carousel-hero-navigation-buttons {
+    max-width: 1192px;
+    margin: 0 auto;
+    padding: 16px 28px;
   }
+}
 
+/* Desktop — content band overlaps image bottom, larger heading (source values:
+   h2 36px, margin 18px 0 0; description 18px/31.5px) */
+@media (width >= 900px) {
   .carousel-hero .carousel-hero-slide-content h2 {
-    margin: 0;
+    margin: 18px 0 0;
     font-size: 36px;
     line-height: 54px;
   }
 
   .carousel-hero .carousel-hero-slide-content p {
     margin-top: 0;
+    font-size: 18px;
     line-height: 1.75;
   }
 }
