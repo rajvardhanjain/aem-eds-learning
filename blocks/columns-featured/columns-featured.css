@@ -1,0 +1,117 @@
+/* Block: columns-featured — CSS extracted from WKND featured teaser computed styles.
+   Source: .teaser.cmp-teaser--featured on https://wknd.site/us/en.html */
+
+/* Row: image cell + text cell. Mobile-first (stacked). */
+.columns-featured > div {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Image cell */
+.columns-featured > div > .columns-featured-img-col {
+  order: 0;
+  padding: 0;
+  display: flex;
+}
+
+.columns-featured img {
+  width: 100%;
+}
+
+.columns-featured > div > .columns-featured-img-col picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.columns-featured > div > .columns-featured-img-col img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* source img 709x509 cover */
+}
+
+/* Text/content cell — grey panel */
+.columns-featured > div > div {
+  order: 1;
+  background-color: #ebebeb; /* source content panel bg */
+  padding: 36px;
+}
+
+/* Description (general paragraph) */
+.columns-featured > div > div p {
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-color);
+}
+
+/* Pretitle (first paragraph, e.g. "Featured Article") — higher specificity wins */
+.columns-featured > div > div > p:first-of-type {
+  margin: 0 0 13.5px;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--text-color);
+}
+
+/* Title */
+.columns-featured > div > div h2 {
+  margin: 18px 0;
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.5;
+  color: var(--text-color);
+}
+
+/* CTA — the featured teaser's last link always renders as a yellow button.
+   The project's decorateButtons only buttonizes strong/em-wrapped links, so
+   style the plain trailing link here to match the source (uppercase yellow CTA). */
+.columns-featured > div > div > p:last-child {
+  margin: 18px 0 0;
+}
+
+.columns-featured > div > div > p:last-child a:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid var(--brand-yellow);
+  border-radius: 0;
+  padding: 14px 35px;
+  background-color: var(--brand-yellow);
+  color: var(--brand-dark);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.columns-featured > div > div > p:last-child a:hover {
+  border-color: var(--brand-yellow-hover);
+  background-color: var(--brand-yellow-hover);
+  color: var(--brand-dark);
+  text-decoration: none;
+}
+
+@media (width >= 900px) {
+  .columns-featured > div {
+    display: grid;
+    grid-template-columns: 1.66fr 1fr; /* source 709px : 427px */
+    align-items: stretch;
+  }
+
+  .columns-featured > div > .columns-featured-img-col {
+    order: unset;
+  }
+
+  .columns-featured > div > div {
+    order: unset;
+    padding: 63px 36px 36px; /* source content padding */
+  }
+}

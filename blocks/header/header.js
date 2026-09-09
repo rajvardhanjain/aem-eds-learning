@@ -1,4 +1,4 @@
-import { getMetadata } from '../../scripts/aem.js';
+import { decorateIcons } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 
 // media query match that indicates mobile/tablet width
@@ -113,10 +113,11 @@ function toggleMenu(nav, navSections, forceExpanded = null) {
  * @param {Element} block The header block element
  */
 export default async function decorate(block) {
-  // load nav as fragment
-  const navMeta = getMetadata('nav');
-  const navPath = navMeta ? new URL(navMeta, window.location).pathname : '/nav';
-  const fragment = await loadFragment(navPath);
+  // load nav as fragment — /content first (localhost + aem up), then root (DA/EDS prod)
+  let fragment = await loadFragment('/content/nav');
+  if (!fragment || !fragment.firstElementChild) {
+    fragment = await loadFragment('/nav');
+  }
 
   // decorate nav DOM
   block.textContent = '';
@@ -164,8 +165,50 @@ export default async function decorate(block) {
   toggleMenu(nav, navSections, isDesktop.matches);
   isDesktop.addEventListener('change', () => toggleMenu(nav, navSections, isDesktop.matches));
 
+  // convert a ":search:" text token in the tools section into a search box
+  // (icon + expandable input), matching WKND's header search.
+  const navTools = nav.querySelector('.nav-tools');
+  if (navTools) {
+    navTools.innerHTML = '';
+    const search = document.createElement('div');
+    search.className = 'nav-search';
+    search.innerHTML = `
+      <button type="button" class="nav-search-toggle" aria-label="Search">
+        <span class="icon icon-search"></span>
+      </button>
+      <input type="search" class="nav-search-input" placeholder="SEARCH" aria-label="Search" />`;
+    const toggle = search.querySelector('.nav-search-toggle');
+    const input = search.querySelector('.nav-search-input');
+    toggle.addEventListener('click', () => {
+      search.classList.toggle('nav-search-open');
+      if (search.classList.contains('nav-search-open')) input.focus();
+    });
+    navTools.append(search);
+  }
+
+  decorateIcons(nav);
+
+  // utility bar (site chrome): Sign In + locale selector, above the main nav.
+  const utility = document.createElement('div');
+  utility.className = 'nav-utility';
+  utility.innerHTML = `
+    <div class="nav-utility-inner">
+      <a class="nav-signin" href="#signin">Sign In</a>
+      <div class="nav-locale">
+        <button type="button" class="nav-locale-toggle" aria-haspopup="true" aria-expanded="false">
+          <span class="nav-locale-flag" aria-hidden="true">🇺🇸</span> EN-US
+        </button>
+      </div>
+    </div>`;
+  const localeToggle = utility.querySelector('.nav-locale-toggle');
+  localeToggle.addEventListener('click', () => {
+    const open = localeToggle.getAttribute('aria-expanded') === 'true';
+    localeToggle.setAttribute('aria-expanded', open ? 'false' : 'true');
+  });
+
   const navWrapper = document.createElement('div');
   navWrapper.className = 'nav-wrapper';
+  navWrapper.append(utility);
   navWrapper.append(nav);
   block.append(navWrapper);
 }

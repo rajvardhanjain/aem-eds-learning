@@ -1,0 +1,53 @@
+/* social-links block
+ * Source: WKND ".sharing" — a "Share this story" row.
+ * The source rendered third-party JS share widgets (Facebook/Pinterest);
+ * on EDS these are plain text-label links, styled here as a clean
+ * horizontal row. Values (color, font, padding) come from the source
+ * computed styles and are mapped to brand tokens where they match.
+ */
+
+.social-links {
+  padding: 0 14px; /* source .sharing container padding */
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m); /* 18px, source */
+  line-height: 27px;
+  color: var(--text-color); /* rgb(32,32,32) */
+}
+
+.social-links .social-links-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.social-links .social-links-item {
+  margin: 0;
+}
+
+.social-links .social-links-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 1px solid var(--dark-color);
+  border-radius: 999px;
+  color: var(--text-color);
+  font-size: var(--body-font-size-s); /* 16px */
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.social-links .social-links-link:hover,
+.social-links .social-links-link:focus {
+  background-color: var(--text-color);
+  border-color: var(--text-color);
+  color: var(--background-color);
+  text-decoration: none;
+}

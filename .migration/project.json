@@ -1,0 +1,11 @@
+{
+  "type": "da",
+  "sites": {
+    "aem-eds-learning": {
+      "previewOrg": "rajvardhanjain",
+      "previewSite": "aem-eds-learning",
+      "contentHostUrl": "https://content.da.live/rajvardhanjain/aem-eds-learning/",
+      "libraryUrl": "https://main--sta-boilerplate--aemdemos.aem.page/tools/sidekick/library.json"
+    }
+  }
+}

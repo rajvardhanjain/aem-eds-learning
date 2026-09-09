@@ -1,0 +1,43 @@
+/* Block: writer-details -- design migrated from WKND .byline (computed styles) */
+
+.writer-details .writer-details-person {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.writer-details .writer-details-avatar {
+  flex: 0 0 auto;
+  line-height: 0;
+}
+
+.writer-details .writer-details-avatar img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.writer-details .writer-details-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.writer-details .writer-details-name {
+  margin: 0 0 4px;
+  font-family: var(--heading-font-family);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 36px;
+  color: var(--text-color);
+}
+
+.writer-details .writer-details-role {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 30px;
+  text-transform: uppercase;
+  color: rgb(105 105 105);
+}

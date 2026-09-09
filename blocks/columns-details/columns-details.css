@@ -1,0 +1,41 @@
+/* Block: columns-details -- activity spec/details list (label|value pairs)
+   Design extracted from https://wknd.site/us/en/adventures/bali-surf-camp.html
+   Decorated DOM: .columns-details > div (item) > div (label cell) + div (value cell), each with a <p>. */
+
+.columns-details {
+  margin: 18px 0;
+  font-family: var(--body-font-family);
+  color: var(--text-color);
+}
+
+/* each row = one spec item, stacked label above value, with grey left accent bar */
+.columns-details > div {
+  display: block;
+  margin: 0 0 22.5px;
+  padding: 0 18px;
+  border-left: 5px solid #ebebeb;
+}
+
+.columns-details > div:last-child {
+  margin-bottom: 0;
+}
+
+/* label cell (first) */
+.columns-details > div > div:first-child p {
+  margin: 0 0 4px;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 18px;
+  color: rgb(105 105 105);
+  text-transform: uppercase;
+}
+
+/* value cell (second) */
+.columns-details > div > div:last-child p {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 21px;
+  color: var(--text-color);
+  text-transform: uppercase;
+}

@@ -1,0 +1,58 @@
+/* tabs-filter — WKND adventures category filter tab bar */
+
+/* Values extracted from wknd.site .cmp-tabs computed styles. */
+
+/* tab list: horizontal, wraps to multiple rows */
+.tabs-filter .tabs-filter-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0;
+  margin: 18px 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* individual tab buttons — inactive state */
+.tabs-filter .tabs-filter-list button.tabs-filter-tab {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+  margin: 0;
+  border: 0;
+  border-bottom: 1px solid transparent;
+  border-radius: 0;
+  padding: 8px 16px;
+  background-color: transparent;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: normal;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tabs-filter .tabs-filter-list button.tabs-filter-tab p {
+  margin: 0;
+}
+
+/* active tab — solid dark fill, white text */
+.tabs-filter .tabs-filter-list button.tabs-filter-tab[aria-selected='true'] {
+  background-color: var(--brand-dark);
+  color: var(--background-color);
+  cursor: default;
+}
+
+/* panels: no chrome, cards grid handles its own spacing */
+.tabs-filter .tabs-filter-panel {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.tabs-filter .tabs-filter-panel[aria-hidden='true'] {
+  display: none;
+}

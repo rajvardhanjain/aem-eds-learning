@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "url": "https://wknd.site/us/en/adventures/surf-camp-costa-rica.html",
+  "path": "us/en/adventures/surf-camp-costa-rica",
+  "timestamp": "2026-09-08T16:20:26.971Z",
+  "title": "Surf Camp in Costa Rica",
+  "template": "adventures",
+  "blocks": [
+    "carousel-gallery",
+    "columns-details",
+    "social-links",
+    "tabs-content"
+  ]
+}

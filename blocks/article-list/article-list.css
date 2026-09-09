@@ -1,0 +1,85 @@
+/* Block: article-list — index-driven article cards (WKND magazine listing) */
+
+/* Shares the WKND cards-article visual language for consistency. */
+
+.article-list > ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  align-items: start;
+}
+
+.article-list > ul > li {
+  margin: 0;
+  padding: 0;
+  background-color: initial;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.article-list .article-list-card-image {
+  line-height: 0;
+}
+
+.article-list .article-list-card-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 13 / 10;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.article-list .article-list-card-body {
+  margin: 0;
+}
+
+.article-list .article-list-card-body h3 {
+  margin: 9px 0 0;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 27px;
+  letter-spacing: normal;
+  text-transform: uppercase;
+}
+
+.article-list .article-list-card-body h3 a {
+  color: var(--text-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.article-list .article-list-card-body h3 a:hover {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.article-list .article-list-card-body p {
+  margin: 16px 0 0;
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  color: #696969;
+}
+
+.article-list .article-list-empty {
+  color: #696969;
+  font-style: italic;
+}
+
+@media (width >= 600px) {
+  .article-list > ul {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (width >= 900px) {
+  .article-list > ul {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

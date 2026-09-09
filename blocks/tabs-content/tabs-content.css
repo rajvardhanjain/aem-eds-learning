@@ -1,0 +1,110 @@
+/* Block: tabs-content — WKND adventure detail content tabs.
+   Values extracted from https://wknd.site/us/en/adventures/bali-surf-camp.html */
+
+/* --- Tab bar --- */
+.tabs-content .tabs-content-list {
+  display: flex;
+  flex-direction: row;
+  gap: 0;
+  max-width: 100%;
+  margin: 18px 0;
+  overflow-x: auto;
+}
+
+.tabs-content .tabs-content-list button.tabs-content-tab {
+  flex: 0 0 max-content;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  padding: 8px 16px;
+  background-color: transparent;
+  color: var(--text-color);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 21px;
+  letter-spacing: normal;
+  text-transform: uppercase;
+  text-align: center;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tabs-content .tabs-content-list button.tabs-content-tab p {
+  margin: 0;
+}
+
+.tabs-content .tabs-content-list button.tabs-content-tab[aria-selected='true'] {
+  background-color: var(--brand-dark);
+  color: #fff;
+  cursor: default;
+}
+
+/* --- Panels --- */
+.tabs-content .tabs-content-panel {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.tabs-content .tabs-content-panel[aria-hidden='true'] {
+  display: none;
+}
+
+/* --- Panel content typography --- */
+/* stylelint-disable-next-line no-descending-specificity */
+.tabs-content .tabs-content-panel p {
+  margin: 0 0 13.5px;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 45px;
+  color: var(--text-color);
+}
+
+.tabs-content .tabs-content-panel p strong {
+  font-weight: 700;
+}
+
+.tabs-content .tabs-content-panel h3 {
+  margin: 27px 0 13.5px;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-size-l);
+  font-weight: 400;
+  line-height: 36px;
+  color: var(--text-color);
+}
+
+/* Images sit full-width within the panel */
+.tabs-content .tabs-content-panel picture {
+  display: block;
+}
+
+.tabs-content .tabs-content-panel picture img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 7px 0;
+}
+
+/* Wrap image in its own paragraph without inheriting text spacing */
+/* stylelint-disable-next-line no-descending-specificity */
+.tabs-content .tabs-content-panel p:has(picture) {
+  margin: 0;
+  line-height: normal;
+}
+
+/* --- Lists --- */
+.tabs-content .tabs-content-panel ul,
+.tabs-content .tabs-content-panel ol {
+  margin: 18px 0;
+  padding-left: 20px;
+}
+
+.tabs-content .tabs-content-panel li {
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  line-height: 31.5px;
+  color: var(--text-color);
+}

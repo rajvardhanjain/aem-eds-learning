@@ -1,0 +1,74 @@
+/* Block: hero-static — full-bleed image with overlapping white content card.
+ * Values extracted from WKND source (.teaser.cmp-teaser--hero) computed styles. */
+
+.hero-static {
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
+
+/* --- Image row: pull out to the section container edges (cancel the 24px
+ *     mobile section padding) so the image reads as full-bleed. --- */
+.hero-static > div:first-child {
+  margin: 0 -24px;
+}
+
+.hero-static > div:first-child picture {
+  display: block;
+}
+
+.hero-static > div:first-child img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1280 / 640;
+  object-fit: cover;
+}
+
+/* --- Content card row: white card, dark text, overlaps the image bottom. --- */
+.hero-static > div:last-child {
+  position: relative;
+  z-index: 1;
+  margin-top: -48px;
+}
+
+.hero-static > div:last-child > div {
+  background-color: var(--background-color);
+  padding: 24px;
+  color: var(--text-color);
+  text-align: left;
+}
+
+.hero-static h2 {
+  margin: 18px 0 0;
+  font-family: var(--heading-font-family);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 54px;
+  color: var(--text-color);
+}
+
+.hero-static p {
+  margin: 0;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 31.5px;
+  color: var(--text-color);
+}
+
+@media (width >= 900px) {
+  .hero-static > div:first-child {
+    margin: 0 -32px;
+  }
+
+  /* Card overlaps upward so its bottom aligns with the image bottom
+   * (source: margin-top -180px = card height). */
+  .hero-static > div:last-child {
+    margin-top: -180px;
+  }
+
+  .hero-static > div:last-child > div {
+    padding: 18px 28px 44px;
+  }
+}

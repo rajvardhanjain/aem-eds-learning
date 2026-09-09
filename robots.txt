@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://main--aem-eds-learning--rajvardhanjain.aem.live/sitemap.xml
