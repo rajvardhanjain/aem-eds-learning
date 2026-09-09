@@ -368,6 +368,52 @@ body.magazine-article main blockquote {
   color: var(--text-color);
 }
 
+/* ===== Adventure detail page (body.adventure-detail) ===== */
+
+/* WKND adventure pages: full-width lead gallery + title on top, then a narrow
+   spec sidebar (~291px, left) beside the wide tabbed content (~845px, right).
+   My content is a single section stacking: breadcrumb, gallery, title, specs,
+   share heading, social, tabs — place them into a 2-column grid on desktop. */
+@media (width >= 900px) {
+  body.adventure-detail main > .section {
+    display: grid;
+    grid-template-columns: 291px 1fr;
+    column-gap: 32px;
+    align-items: start;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 0 32px;
+  }
+
+  /* the section wrappers already center at 1200px; inside the grid they should
+     fill their column instead */
+  body.adventure-detail main > .section > div {
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* full-width row: breadcrumb, lead gallery, title/intro (first 3 wrappers) */
+  body.adventure-detail main > .section > .default-content-wrapper:nth-child(1),
+  body.adventure-detail main > .section > .carousel-gallery-wrapper,
+  body.adventure-detail main > .section > .default-content-wrapper:nth-child(3) {
+    grid-column: 1 / -1;
+  }
+
+  /* left sidebar: spec list + share heading + social links */
+  body.adventure-detail main > .section > .columns-details-wrapper,
+  body.adventure-detail main > .section > .default-content-wrapper:nth-child(5),
+  body.adventure-detail main > .section > .social-links-wrapper {
+    grid-column: 1;
+  }
+
+  /* right column: tabbed content */
+  body.adventure-detail main > .section > .tabs-content-wrapper {
+    grid-column: 2;
+    grid-row: 4 / 7;
+  }
+}
+
 main .section.dark {
   background-color: var(--brand-dark);
   color: #fff;
