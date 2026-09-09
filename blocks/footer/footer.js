@@ -8,10 +8,14 @@ const SOCIAL = ['facebook', 'twitter', 'instagram'];
  * @param {Element} block The footer block element
  */
 export default async function decorate(block) {
-  // load footer as fragment — /content first (localhost + aem up), then root (DA/EDS prod)
-  let fragment = await loadFragment('/content/footer');
+  // Pick the correct path up front to avoid a 404 in the console: the local
+  // `aem up` preview serves under /content/, production (.aem.page/.live) does not.
+  const underContent = window.location.pathname.startsWith('/content/');
+  const primary = underContent ? '/content/footer' : '/footer';
+  const fallback = underContent ? '/footer' : '/content/footer';
+  let fragment = await loadFragment(primary);
   if (!fragment || !fragment.firstElementChild) {
-    fragment = await loadFragment('/footer');
+    fragment = await loadFragment(fallback);
   }
 
   // decorate footer DOM
