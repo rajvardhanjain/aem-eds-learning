@@ -375,6 +375,19 @@ main > .section:first-of-type {
   }
 }
 
+/* Inter-block rhythm — WKND separates major content blocks with generous
+   vertical space. Space the standalone section headings that introduce each
+   block ("Recent Articles", "Next Adventures", "Members Only") and the article
+   grids so the sections don't read as cramped. */
+main .default-content-wrapper > h2 {
+  margin-top: 48px;
+}
+
+main .article-list,
+main .members-cards {
+  margin-top: 16px;
+}
+
 /* section metadata */
 main .section.light,
 main .section.highlight,
