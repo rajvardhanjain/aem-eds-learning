@@ -342,6 +342,32 @@ main .section.grey {
   padding: 40px 0;
 }
 
+/* ===== Magazine article page (body.magazine-article) ===== */
+
+/* WKND articles use a narrow, airy readable column (source prose ~776px wide,
+   18px / 45px line-height) rather than the full 1200px content width. */
+body.magazine-article main > .section > div {
+  max-width: 840px;
+}
+
+body.magazine-article main p {
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+/* pull-quote: plain (no border), Source Sans Pro, indented (source: 18px/27px,
+   margin 18px 40px) */
+body.magazine-article main blockquote {
+  margin: 18px 40px;
+  padding: 0;
+  border: 0;
+  font-family: var(--body-font-family);
+  font-size: 18px;
+  font-style: normal;
+  line-height: 27px;
+  color: var(--text-color);
+}
+
 main .section.dark {
   background-color: var(--brand-dark);
   color: #fff;
